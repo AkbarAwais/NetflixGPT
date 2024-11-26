@@ -14,8 +14,6 @@ const Form = () => {
     const [successMessage, setSuccessMessage] = useState(null);
     const navigate = useNavigate();
 
-
-
     const handleButtonClick = () => {
         const message = validate(email.current?.value, password.current?.value, !toggleForm && name.current?.value);
         if (message) {
@@ -32,11 +30,7 @@ const Form = () => {
         setErrorMessage(null)
         if (!toggleForm) {
             createUserWithEmailAndPassword(auth, email.current?.value, password.current?.value).then((userCredential) => {
-                userCredential.user && setSuccessMessage("Sign up Successfull");
-                email.current.style.borderColor = "green"
-                password.current.style.borderColor = "green"
-                if (name.current) name.current.style.borderColor = "green"
-
+                navigate("/browse")
             }).catch((error) => {
                 if (error.code && error.code.includes("email-already-in-use")) {
                     setErrorMessage("Email Already In Use")
