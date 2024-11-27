@@ -2,7 +2,6 @@ import React, { useRef, useState } from 'react'
 import { validate } from '../utils/formValidation';
 import { createUserWithEmailAndPassword, sendPasswordResetEmail, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { auth } from '../utils/firebase';
-import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addUser, updateUser } from '../utils/userSlice';
 
@@ -16,7 +15,6 @@ const Form = () => {
     const [successMessage, setSuccessMessage] = useState(null);
     const [resetSuccess, setResetSucces] = useState(false);
     const [resetBtn, setResetBtn] = useState(false);
-    const navigate = useNavigate();
     const dispatch = useDispatch();
 
 
@@ -48,7 +46,6 @@ const Form = () => {
                     displayName: name.current?.value
                 }).then(() => {
                     dispatch(addUser({ uid: auth.currentUser.uid, email: auth.currentUser.email, displayName: auth.currentUser.displayName }))
-                    navigate("/browse")
                 })
             }).catch((error) => {
                 if (error.code && error.code.includes("email-already-in-use")) {
@@ -62,7 +59,6 @@ const Form = () => {
         } else {
             signInWithEmailAndPassword(auth, email.current?.value, password.current?.value).then((userCredential) => {
                 dispatch(updateUser({ uid: userCredential.uid, email: userCredential.email, displayName: userCredential.displayName }))
-                navigate("/browse")
             }, (error) => {
                 if (error.code && error.code.includes("invalid-credential")) {
                     setErrorMessage("Invalid Crendentials")
