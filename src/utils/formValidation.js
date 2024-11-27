@@ -1,6 +1,6 @@
 
 
-export const validate = (email, password, name) => {
+export const validate = (email, password, name, ignorePass) => {
 
     const emailValidation = /^[a-zA-Z0-9_.+\-]+[\x40][a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/.test(email);
 
@@ -8,7 +8,7 @@ export const validate = (email, password, name) => {
 
 
     if (!emailValidation) return "Email is Invalid";
-    if (!passwordValidation) return "Password is Invalid";
+    if (!ignorePass && !passwordValidation) return "Password is Invalid";
 
     if (name === "") {
         const nameValidation = /^[\\p{L} .'-]+$/.test(name);
