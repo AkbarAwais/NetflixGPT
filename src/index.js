@@ -9,7 +9,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 const Main = () => {
     return (
         // <React.StrictMode>
-            <App />
+        <App />
         // </React.StrictMode>
     )
 }

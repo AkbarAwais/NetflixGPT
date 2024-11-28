@@ -8,10 +8,10 @@ const Browse = () => {
     useMovieData();
 
     return (
-        <div>
+        <div className='bg-black'>
             <Header />
             <MainContainer />
-            {/* <SecondaryContainer /> */}
+            <SecondaryContainer />
         </div>
     )
 }

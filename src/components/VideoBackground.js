@@ -7,7 +7,6 @@ const VideoBackground = ({ movieId }) => {
     useTrailer(movieId);
     const trailer = useSelector((store) => store?.movies?.trailer);
     if (!trailer) return;
-    console.log(trailer);
     const trailerUrl = MAIN_TRAILER_URL(trailer.key)
     return (
         <div className=''>
