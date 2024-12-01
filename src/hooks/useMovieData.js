@@ -5,6 +5,7 @@ import { useEffect } from "react";
 
 
 const useMoviewData = () => {
+
     const dispatch = useDispatch();
     const fetchMovieData = async () => {
         const data = await fetch(GET_MOVIE_LIST, API_OPTIONS);
