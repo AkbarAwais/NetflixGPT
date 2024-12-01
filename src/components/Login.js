@@ -7,11 +7,11 @@ import { useSelector } from 'react-redux'
 const Login = () => {
     const user = useSelector((store) => store.user);
     return (
-        <div className='block'>
+        <div className=''>
             {
                 !user && <>
-                    <div className='bg-[rgb(0,0,0)] -z-[1] overflow-hidden bg-cover h-screen block absolute w-[-webkit-fill-available]'>
-                        <img className='opacity-[0.5] min-h-[100%] max-w-[unset]' src={NETFLIX_BG} alt='Netflix Img'></img>
+                    <div className='bg-[rgb(0,0,0)] -z-[1] overflow-hidden block absolute'>
+                        <img className='opacity-[0.5] h-screen md:h-full object-cover' src={NETFLIX_BG} alt='Netflix Img'></img>
                     </div>
                     <Header />
                     <Form /></>

@@ -75,8 +75,8 @@ const Form = () => {
     }
 
     return (
-        <div className='flex items-center justify-center absolute inset-0 min-w-[450px]'>
-            <div className=' max-w-md bg-black bg-opacity-75 p-10 rounded-lg shadow-lg'>
+        <div className='flex items-center justify-center absolute inset-0 w-[390px] md:w-full'>
+            <div className='bg-black bg-opacity-75 p-10 rounded-lg shadow-lg'>
                 <style jsx global>{`
                     input:-webkit-autofill,
                     input:-webkit-autofill:hover,

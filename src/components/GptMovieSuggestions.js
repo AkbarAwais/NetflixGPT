@@ -8,7 +8,7 @@ const GptMovieSuggestions = () => {
     console.log(movie);
 
     return (
-        <div className='text-white absolute top-52 left-10'>
+        <div className='text-white absolute top-96 md:top-64 px-0'>
             <MovieList title={"Search Results"} movies={movie} />
         </div>
     )

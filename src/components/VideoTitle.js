@@ -2,15 +2,14 @@ import React from 'react'
 
 const VideoTitle = ({ title, overview }) => {
     return (
-        <div className='w-screen aspect-video pt-72 px-20 absolute bg-gradient-to-r from-black cursor-default'>
-            <h1 className='text-5xl font-extrabold text-white inline hover:text-gray-300 transition-all ease-in-out duration-300 ml-4'>{title}</h1>
-            <div className='text-2xl w-1/3 p-4 text-justify text-white flex-wrap text-ellipsis'>{overview}</div>
-            <button className='ml-6 mt-2 text-2xl bg-white border-white bg-opacity-100 text-black rounded-lg px-8 py-2 mr-5 hover:bg-gray-400
-            hover:text-black transition-all duration-300 ease-in-out'>
-
+        <div className='h-[300px] w-3/4 md:h-screen text-ellipsis md:w-screen aspect-video pt-2 md:pt-72 md:px-20 whitespace-wrap px-10 absolute bg-gradient-to-r from-black cursor-default'>
+            <h1 className='text-lg md:text-5xl font-extrabold text-white inline hover:text-gray-300 transition-all ease-in-out duration-300 ml-4 relative md:top-0 top-10'>{title}</h1>
+            <div className='hidden md:block md:text-2xl md:w-1/3 md:p-4 md:text-justify text-white md:flex-wrap text-ellipsis md:h-[300px] h-[100px] md:whitespace-normal overflow-hidden'>{overview}</div>
+            <button className='ml-6 m-5 md:text-2xl bg-white border-white bg-opacity-100 text-black rounded-lg px-8 py-2 mr-5 hover:bg-gray-400
+            hover:text-black transition-all duration-300 ease-in-out relative md:top-0 top-10 right-2'>
                 Play</button>
-            <button className='text-2xl border-white bg-gray-500 bg-opacity-20 text-white rounded-lg px-6 py-2 hover:bg-white
-            transition-all hover:text-black duration-300 ease-in-out'>More info</button>
+            <button className='hidden md:inline-block md:text-2xl border-white bg-gray-500 bg-opacity-20 text-white rounded-lg px-6 py-2 hover:bg-white
+            transition-all hover:text-black duration-300 ease-in-out ml-3 mt-2'>More info</button>
         </div>
     )
 }

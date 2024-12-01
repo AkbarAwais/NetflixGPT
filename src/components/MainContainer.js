@@ -9,7 +9,7 @@ const MainContainer = () => {
     const mainMovie = movies[Math.floor(Math.random() * movies.length)];
     const { original_title, overview } = mainMovie
     return (
-        <div className=''>
+        <div className='relative top-48 md:top-0'>
             <VideoTitle title={original_title} overview={overview} />
             <VideoBackground movieId={mainMovie.id} />
         </div>
