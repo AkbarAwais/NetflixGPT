@@ -11,7 +11,7 @@ const Login = () => {
             {
                 !user && <>
                     <div className='bg-[rgb(0,0,0)] -z-[1] overflow-hidden block absolute'>
-                        <img className='opacity-[0.5] h-screen md:h-full object-cover' src={NETFLIX_BG} alt='Netflix Img'></img>
+                        <img className='opacity-[0.5] h-screen md:h-screen w-screen object-cover' src={NETFLIX_BG} alt='Netflix Img'></img>
                     </div>
                     <Header />
                     <Form /></>
