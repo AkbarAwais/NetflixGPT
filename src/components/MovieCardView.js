@@ -13,7 +13,7 @@ const MovieCardView = ({ title, image, video }) => {
 
     const handleMouseEnter = () => {
         setIsHovered(true);
-        setIframeSrc(`https://www.youtube.com/embed/${video}?autoplay=1&mute=1&modestbranding=1&controls=0&loop=1&rel=0&playlist=${video}&vq=hd1080`);
+        setIframeSrc(`https://www.youtube.com/embed/${video}?autoplay=1&controls=1&mute=0&modestbranding=1&controls=0&loop=1&rel=0&playlist=${video}&vq=hd1080`);
     };
 
     const handleMouseLeave = () => {
