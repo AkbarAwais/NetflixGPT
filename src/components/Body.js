@@ -4,6 +4,7 @@ import Browse from './Browse'
 import { createBrowserRouter } from 'react-router-dom'
 import { RouterProvider } from 'react-router-dom'
 import GptSearch from './GptSearch'
+import PlayTrailerInFullScreen from "./PlayTrailerInFullScreen"
 
 
 const Body = () => {
@@ -19,6 +20,10 @@ const Body = () => {
         {
             path: "/search",
             element: <GptSearch />
+        },
+        {
+            path: "/playVideo",
+            element: <PlayTrailerInFullScreen />
         }
     ])
 

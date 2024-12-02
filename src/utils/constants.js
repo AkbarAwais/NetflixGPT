@@ -2,7 +2,8 @@ export const NETFLIX_BG = "https://assets.nflxext.com/ffe/siteui/vlv3/2bcf01ee-7
 export const GET_MOVIE_LIST = 'https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1';
 export const MAIN_VIDEO_URL = (movieId) => `https://api.themoviedb.org/3/movie/${movieId}/videos?language=en-US`;
 export const MAIN_TRAILER_URL = (trailerId) => `https://www.youtube.com/embed/${trailerId}?&autoplay=1&mute=1&modestbranding=1&controls=0&loop=1&rel=0&playlist=${trailerId}`;
-export const IMAGE_URL = (movieId) => "https://image.tmdb.org/t/p/w200/" + movieId;
+export const FULL_SCREEN_TRAILER_URL = (trailerId) => `https://www.youtube.com/embed/${trailerId}?&modestbranding=1&controls=1&loop=1&rel=0&playlist=${trailerId}`;
+export const IMAGE_URL = (movieId) => "https://image.tmdb.org/t/p/w200" + movieId;
 
 export const POPULAR_MOVIE_LIST = 'https://api.themoviedb.org/3/movie/popular?language=en-US&page=2';
 export const TOP_RATED_LIST = 'https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=2';
