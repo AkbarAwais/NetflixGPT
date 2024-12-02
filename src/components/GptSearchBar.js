@@ -7,16 +7,28 @@ import { addSearchMovies } from '../utils/gptMovieSlice';
 const GptSearchBar = () => {
     const searchRef = useRef(null);
     const [search, setSearch] = useState(true);
-    const moviesPromises = [];
-    const jsonPromises = [];
     const dispatch = useDispatch();
     const fetchMovie = async (movieList) => {
-        movieList.forEach((movie) => { moviesPromises.push(fetch(`https://api.themoviedb.org/3/search/movie?query=${movie}&include_adult=false&language=en-US&page=1`, API_OPTIONS)); });
-        const promiseJSON = await Promise.all(moviesPromises);
-        promiseJSON.forEach((moviePromise) => jsonPromises.push(moviePromise.json()));
-        const finalMovieList = await Promise.all(jsonPromises);
-        dispatch(addSearchMovies(finalMovieList.map(item => item.results[0])));
-    }
+        const moviesPromises = movieList.map((movie) =>
+            fetch(`https://api.themoviedb.org/3/search/movie?query=${movie}&include_adult=false&language=en-US&page=1`, API_OPTIONS)
+        );
+
+        try {
+            // Await all fetch requests and convert to JSON in one step
+            const movieResponses = await Promise.all(moviesPromises);
+
+            // Parse JSON from each response and collect the results
+            const finalMovieList = await Promise.all(
+                movieResponses.map(response => response.json())
+            );
+
+            // Dispatch movies to Redux store
+            dispatch(addSearchMovies(finalMovieList.map(item => item.results[0])));
+        } catch (error) {
+            console.error("Error fetching movies:", error);
+        }
+    };
+
     const handleButtonClick = async () => {
         if (!searchRef.current.value) {
             setSearch(false);
