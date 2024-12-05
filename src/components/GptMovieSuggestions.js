@@ -14,7 +14,7 @@ const GptMovieSuggestions = () => {
 
     const fetchGptMovies = async () => {
         try {
-            const promises = movie.map(item => fetch(MAIN_VIDEO_URL(item.id), API_OPTIONS));
+            const promises = movie?.filter(item => item).map(item => fetch(MAIN_VIDEO_URL(item?.id), API_OPTIONS));
             const jsonData = await Promise.all(promises);
             const finalData = await Promise.all(jsonData.map(item => item.json()));
 
@@ -35,7 +35,7 @@ const GptMovieSuggestions = () => {
     if (!movie) return null; // Optional: show loading or error state if no movie
 
     return (
-        <div className='text-white absolute top-96 md:top-64 px-0'>
+        <div className='text-white absolute w-full top-96 flex overflow-x-scroll md:overflow-x-auto md:top-64 px-0'>
             <MovieList title={"Search Results"} movies={searchList} />
         </div>
     );

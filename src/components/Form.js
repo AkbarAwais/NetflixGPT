@@ -75,7 +75,7 @@ const Form = () => {
     }
 
     return (
-        <div className='flex items-center justify-center absolute inset-0 w-[390px] md:w-full'>
+        <div className='flex items-center justify-center absolute inset-0 w-[395px] md:w-full'>
             <div className='bg-black bg-opacity-75 p-10 rounded-lg shadow-lg'>
                 <style jsx global>{`
                     input:-webkit-autofill,
