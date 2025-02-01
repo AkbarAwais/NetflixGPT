@@ -105,7 +105,7 @@ const Form = () => {
                          hover:bg-zinc-800/50 placeholder:text-transparent border-1
                          peer pt-8 [&:not(:placeholder-shown)]:bg-zinc-800/50' type='text' placeholder="."></input>
                         </div>}
-                        <div className='text-white font-bold ml-32 cursor-pointer hover:text-gray-400 duration-150' onClick={() => signInWithEmailAndPasswordFn(process.env.REACT_APP_EMAIL, process.env.REACT_APP_PASSWORD)}>Guest Login?</div>
+                        <div className='text-white font-bold ml-32 cursor-pointer duration-150 border-2 mr-32 p-3 pt-2 rounded-lg hover:bg-cyan-300 hover:text-black' onClick={() => signInWithEmailAndPasswordFn(process.env.REACT_APP_EMAIL, process.env.REACT_APP_PASSWORD)}>Guest Login</div>
                         <div className='relative space-y-4'>
                             <label htmlFor="email" class="absolute text-sm text-gray-400 duration-150
                          left-5 top-6 peer-placeholder-shown:top-4

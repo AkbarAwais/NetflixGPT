@@ -37,7 +37,7 @@ const Header = () => {
                 <div className='box-border bg-gradient-to-b from-black justify-between items-center sticky inset-0 flex flex-col md:flex-row pl-4'>
                     <img onClick={() => search && handleGptSearchClick()} className='max-w-[200px] cursor-pointer transition-all hover:bg-transparent ease-in-out hover:scale-[1.1] mt-4' src={logo} alt=''></img>
                     <div className='text-yellow-300 font-bold mr-2 text-2xl text-left cursor-default '>
-                        {user && <button className='mr-20 px-2 py-1 text-white transition-all duration-300 ease-in-out hover:scale-[0.95] bg-blue-600 border-2 rounded-lg font-mono' onClick={handleGptSearchClick}>{!search ? 'GPT Search' : 'Homepage'}</button>}
+                        {user && <button className='mr-20 px-2 text-white transition-all duration-300 ease-in-out bg-gray-700 border-2 rounded-lg font-mono hover:bg-orange-300 hover:text-black' onClick={handleGptSearchClick}>{!search ? 'Deepseek' : 'Homepage'}</button>}
                         {user && user.displayName}
                         {user &&
                             <div className='inline-block mr-8 px-12 text-xl text-white transition-all duration-200 ease-in-out hover:scale-[1.1] font-bold cursor-pointer text-right relative left-52 md:left-0 md:px-6 md:py-6' onClick={handleSignOut}>

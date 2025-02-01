@@ -1,30 +1,63 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 @layer utilities {
-    .scrollbar-hide {
-      scrollbar-width: none; /* For Firefox */
-      -ms-overflow-style: none; /* For IE and Edge */
+  .scrollbar-hide {
+    scrollbar-width: none;
+    /* For Firefox */
+    -ms-overflow-style: none;
+    /* For IE and Edge */
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+    /* For Chrome, Safari, and Edge */
+  }
+
+  .scrollbar-custom {
+    scrollbar-width: thin;
+    scrollbar-color: #a0aec0 transparent;
+    /* Thumb and track colors */
+  }
+
+  .scrollbar-custom::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  .scrollbar-custom::-webkit-scrollbar-thumb {
+    background-color: #a0aec0;
+    /* Thumb color */
+    border-radius: 4px;
+  }
+
+  .scrollbar-custom::-webkit-scrollbar-thumb:hover {
+    background-color: #718096;
+    /* Thumb hover color */
+  }
+
+  .scrollbar-custom::-webkit-scrollbar-track {
+    background-color: transparent;
+    /* Track color */
+  }
+
+  .shimmer-effect {
+    background: linear-gradient(90deg,
+        #b0b0b0 25%,
+        #7a7a7a 50%,
+        #b0b0b0 75%);
+    background-size: 200% 100%;
+    animation: shimmer-smooth 1.5s ease-in-out infinite;
+  }
+
+  @keyframes shimmer-smooth {
+    0% {
+      background-position: -200% 0;
     }
-    .scrollbar-hide::-webkit-scrollbar {
-      display: none; /* For Chrome, Safari, and Edge */
-    }
-    .scrollbar-custom {
-      scrollbar-width: thin;
-      scrollbar-color: #a0aec0 transparent; /* Thumb and track colors */
-    }
-    .scrollbar-custom::-webkit-scrollbar {
-      width: 8px;
-      height: 8px;
-    }
-    .scrollbar-custom::-webkit-scrollbar-thumb {
-      background-color: #a0aec0; /* Thumb color */
-      border-radius: 4px;
-    }
-    .scrollbar-custom::-webkit-scrollbar-thumb:hover {
-      background-color: #718096; /* Thumb hover color */
-    }
-    .scrollbar-custom::-webkit-scrollbar-track {
-      background-color: transparent; /* Track color */
+
+    100% {
+      background-position: 200% 0;
     }
   }
+}

@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import MovieList from './MovieList';
 import { API_OPTIONS, MAIN_VIDEO_URL } from '../utils/constants';
+import Notification from './Notification';
 
 const GptMovieSuggestions = () => {
     const movie = useSelector((store) => store.searchMovie?.gptMovies);
     const [searchList, setSearchList] = useState([]);
 
     useEffect(() => {
-        if (!movie) return;
         fetchGptMovies();
     }, [movie]); // Added dependency array to trigger effect on 'movie' change
 
@@ -29,11 +29,10 @@ const GptMovieSuggestions = () => {
             setSearchList(final);
         } catch (error) {
             console.error('Error fetching movie trailers:', error);
+            <Notification type={'error'} message={'Server error'} />
         }
     };
-
-    if (!movie) return null; // Optional: show loading or error state if no movie
-
+    if(!movie) return;
     return (
         <div className='text-white absolute w-full top-96 flex overflow-x-scroll md:overflow-x-auto md:top-64 px-0'>
             <MovieList title={"Search Results"} movies={searchList} />

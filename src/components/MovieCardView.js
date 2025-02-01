@@ -20,7 +20,7 @@ const MovieCardView = ({ title, image, video }) => {
         setIsHovered(false);
         setIframeSrc(''); // Clear the `src` to stop the video
     };
-
+    
     return (
         <div
             className="relative w-48 group px-2"

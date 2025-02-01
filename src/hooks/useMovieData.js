@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { API_OPTIONS, GET_MOVIE_LIST, MAIN_VIDEO_URL, POPULAR_MOVIE_LIST, TOP_RATED_LIST, UPCOMMING_MOVIE_LIST } from "../utils/constants";
-import { addNowPlayingMovies, addPopularMovies, addTopRatedMovies, addUpcommingMovies } from "../utils/movieSlice";
+import { addNowPlayingMovies, addPopularMovies, addTopRatedMovies, addUpcommingMovies, toggleShimmer } from "../utils/movieSlice";
 import { useEffect } from "react";
 
 
@@ -8,6 +8,7 @@ const useMoviewData = () => {
 
     const dispatch = useDispatch();
     const fetchMovieData = async () => {
+        dispatch(toggleShimmer(true));
         try {
             const [nowPlaying, popular, topRated, upcoming] = await Promise.all([
                 fetch(GET_MOVIE_LIST, API_OPTIONS),
@@ -64,6 +65,7 @@ const useMoviewData = () => {
             dispatch(addPopularMovies(popularMovies));
             dispatch(addTopRatedMovies(topRatedMovies));
             dispatch(addUpcommingMovies(upcomingMovies));
+            dispatch(toggleShimmer(false));
 
         } catch (error) {
             console.error("Error fetching movie data:", error);
