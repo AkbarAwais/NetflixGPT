@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 200">
+  <!-- Background glow effect -->
+  <defs>
+    <!-- <linearGradient id="bgGlow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1a1a1a"/>
+      <stop offset="50%" style="stop-color:#000"/>
+      <stop offset="100%" style="stop-color:#1a1a1a"/>
+    </linearGradient> -->
+    
+    <!-- Text gradient -->
+    <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF3366"/>
+      <stop offset="100%" style="stop-color:#FF9933"/>
+    </linearGradient>
+    
+    <!-- Shine effect -->
+    <linearGradient id="shine" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:rgba(255,255,255,0)"/>
+      <stop offset="50%" style="stop-color:rgba(255,255,255,0.1)"/>
+      <stop offset="100%" style="stop-color:rgba(255,255,255,0)"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background rectangle -->
+  <rect x="0" y="0" width="500" height="200" fill="url(#bgGlow)"/>
+
+  <!-- Film strip design -->
+  <path d="M50,60 h400 v80 h-400 z" fill="none" stroke="url(#textGradient)" stroke-width="2"/>
+  <rect x="70" y="60" width="20" height="80" fill="url(#textGradient)" opacity="0.3"/>
+  <rect x="410" y="60" width="20" height="80" fill="url(#textGradient)" opacity="0.3"/>
+
+  <!-- Main text with stylized design -->
+  <text x="250" y="115" font-family="Arial Black, sans-serif" font-size="48" fill="url(#textGradient)" text-anchor="middle" font-weight="bold">
+    TRAILER
+  </text>
+  
+  <!-- Smaller VERSE text -->
+  <text x="250" y="150" font-family="Arial Black, sans-serif" font-size="28" fill="url(#textGradient)" text-anchor="middle" letter-spacing="8">
+    VERSE
+  </text>
+
+  <!-- Shine overlay -->
+  <!-- <rect x="0" y="0" width="500" height="200" fill="url(#shine)" opacity="0.5"/> -->
+
+  <!-- Decorative elements -->
+  <circle cx="100" cy="100" r="3" fill="#FF3366" opacity="0.8"/>
+  <circle cx="400" cy="100" r="3" fill="#FF9933" opacity="0.8"/>
+  <circle cx="250" cy="40" r="2" fill="#FFF" opacity="0.6"/>
+  <circle cx="150" cy="160" r="2" fill="#FFF" opacity="0.6"/>
+  <circle cx="350" cy="160" r="2" fill="#FFF" opacity="0.6"/>
+</svg>

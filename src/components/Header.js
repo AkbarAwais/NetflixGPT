@@ -5,6 +5,7 @@ import { auth } from '../utils/firebase';
 import { useNavigate } from 'react-router-dom';
 import { addUser, removeUser } from '../utils/userSlice';
 import { toggleSearch } from '../utils/gptSlice';
+import logo from '../assets/trailer-verse-logo-v2.svg'
 
 const Header = () => {
     const user = useSelector((store) => store?.user);
@@ -34,7 +35,7 @@ const Header = () => {
         <div className="inset-0 z-10">
             <header className='w-[100%] absolute z-10'>
                 <div className='box-border bg-gradient-to-b from-black justify-between items-center sticky inset-0 flex flex-col md:flex-row pl-4'>
-                    <img onClick={() => search && handleGptSearchClick()} className='max-w-[180px] cursor-pointer transition-all duration-300 ease-in-out hover:scale-[1.1]' src='https://images.ctfassets.net/y2ske730sjqp/6bhPChRFLRxc17sR8jgKbe/6fa1c6e6f37acdc97ff635cf16ba6fb3/Logos-Readability-Netflix-logo.png' alt=''></img>
+                    <img onClick={() => search && handleGptSearchClick()} className='max-w-[200px] cursor-pointer transition-all hover:bg-transparent ease-in-out hover:scale-[1.1] mt-4' src={logo} alt=''></img>
                     <div className='text-yellow-300 font-bold mr-2 text-2xl text-left cursor-default '>
                         {user && <button className='mr-20 px-2 py-1 text-white transition-all duration-300 ease-in-out hover:scale-[0.95] bg-blue-600 border-2 rounded-lg font-mono' onClick={handleGptSearchClick}>{!search ? 'GPT Search' : 'Homepage'}</button>}
                         {user && user.displayName}

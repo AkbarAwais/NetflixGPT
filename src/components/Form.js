@@ -57,17 +57,21 @@ const Form = () => {
 
             });
         } else {
-            signInWithEmailAndPassword(auth, email.current?.value, password.current?.value).then((userCredential) => {
-                dispatch(updateUser({ uid: userCredential.uid, email: userCredential.email, displayName: userCredential.displayName }))
-            }, (error) => {
-                if (error.code && error.code.includes("invalid-credential")) {
-                    setErrorMessage("Invalid Crendentials")
-                    email.current.style.borderColor = "red"
-                    password.current.style.borderColor = "red"
-                }
-            })
+            signInWithEmailAndPasswordFn(email.current?.value, password.current?.value);
         }
 
+    }
+
+    const signInWithEmailAndPasswordFn = (email, password)=>{
+        signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
+            dispatch(updateUser({ uid: userCredential.uid, email: userCredential.email, displayName: userCredential.displayName }))
+        }, (error) => {
+            if (error.code && error.code.includes("invalid-credential")) {
+                setErrorMessage("Invalid Crendentials")
+                if (email.current) email.current.style.borderColor = "red"
+                if (password.current) password.current.style.borderColor = "red"
+            }
+        })
     }
 
     const forgotPasswordHandler = () => {
@@ -101,6 +105,7 @@ const Form = () => {
                          hover:bg-zinc-800/50 placeholder:text-transparent border-1
                          peer pt-8 [&:not(:placeholder-shown)]:bg-zinc-800/50' type='text' placeholder="."></input>
                         </div>}
+                        <div className='text-white font-bold ml-32 cursor-pointer hover:text-gray-400 duration-150' onClick={() => signInWithEmailAndPasswordFn(process.env.REACT_APP_EMAIL, process.env.REACT_APP_PASSWORD)}>Guest Login?</div>
                         <div className='relative space-y-4'>
                             <label htmlFor="email" class="absolute text-sm text-gray-400 duration-150
                          left-5 top-6 peer-placeholder-shown:top-4
@@ -157,7 +162,7 @@ const Form = () => {
                             {resetBtn ? <></> : <>{
                                 toggleForm ?
 
-                                    <h3 className='m-2'>New to Netflix?</h3> : <h3 className='m-2'>Already have an account?</h3>
+                                    <h3 className='m-2'>New to Trailer Verse?</h3> : <h3 className='m-2'>Already have an account?</h3>
                             }</>}
 
                             <p className='mx-0 m-2 hover:underline cursor-pointer hover:text-white' onClick={() => {
