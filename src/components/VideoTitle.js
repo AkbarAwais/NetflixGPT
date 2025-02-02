@@ -18,8 +18,6 @@ const VideoTitle = ({ title, overview, trailerKey }) => {
                     navigate('/playVideo')
                 }}>
                 Play</button>
-            <button className='hidden md:inline-block md:text-2xl border-white bg-gray-500 bg-opacity-20 text-white rounded-lg px-6 py-2 hover:bg-white
-            transition-all hover:text-black duration-300 ease-in-out ml-3 mt-2'>More info</button>
         </div>
     )
 }

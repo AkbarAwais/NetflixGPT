@@ -6,6 +6,7 @@ import SecondaryContainer from './SecondaryContainer';
 import { useSelector } from 'react-redux';
 import GptSearch from "./GptSearch"
 import Shimmer from './Shimmer';
+import LoadingScreen from './LoadingScreen';
 
 const Browse = () => {
     const showGptSearch = useSelector((store) => store.gpt.showGptSearch);
@@ -13,15 +14,10 @@ const Browse = () => {
     useMovieData();
     if (isShimmer) {
         return (
-            <div className='bg-black w-screen h-screen relative pt-10 pl-10 flex'>
-                <Shimmer />
-                <Shimmer />
-                <Shimmer />
-                <Shimmer />
-                <Shimmer />
-                <Shimmer />
-                <Shimmer />
-            </div>)
+            <div>
+                <LoadingScreen/>
+            </div>
+            )
     }
     return (
         <div className='bg-black'>

@@ -1,4 +1,5 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState } from 'react';
+import { Search, Loader2 } from 'lucide-react';
 import client from '../utils/openai';
 import { API_OPTIONS } from '../utils/constants';
 import { useDispatch } from 'react-redux';
@@ -8,70 +9,124 @@ import { addSearchMovies, toggleShimmerEffect } from '../utils/gptMovieSlice';
 const GptSearchBar = () => {
     const searchRef = useRef(null);
     const [search, setSearch] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
+    const [notification, setNotification] = useState(null);
     const dispatch = useDispatch();
+
     const fetchMovie = async (movieList) => {
         const moviesPromises = movieList.map((movie) =>
             fetch(`https://api.themoviedb.org/3/search/movie?query=${movie}&include_adult=false&language=en-US&page=1`, API_OPTIONS)
         );
 
         try {
-            // Await all fetch requests and convert to JSON in one step
             const movieResponses = await Promise.all(moviesPromises);
-
-            // Parse JSON from each response and collect the results
             const finalMovieList = await Promise.all(
                 movieResponses.map(response => response.json())
             );
-
-            // Dispatch movies to Redux store
             dispatch(addSearchMovies(finalMovieList.map(item => item.results[0])));
             dispatch(toggleShimmerEffect(false));
         } catch (error) {
-            console.error("Error fetching movies:", error);
+            setNotification({ type: 'error', message: 'Error fetching trailers. Please try again.' });
         }
     };
 
     const handleButtonClick = async () => {
+        setIsLoading(true);
         dispatch(toggleShimmerEffect(true));
+
         if (!searchRef.current.value) {
             setSearch(false);
+            setIsLoading(false);
             return;
         }
         setSearch(true);
 
-        const GPTQuery = "Act as a Movie Recommendation system and suggest some movies for the query"
+        const GPTQuery = "Act as a Movie Recommendation system and suggest some movies for the query "
             + searchRef.current.value
             + ". and only give me names of 7 movies, in comma seperated eg: Smile, Hera Pheri, Golmal,Don,Gadar";
-        const chatCompletion = await client.chat.completions.create({
-            messages: [{ role: 'user', content: GPTQuery }],
-            model: 'o1-mini'
-        }).catch((error) => {
-            return error;
 
-        });
-        if(chatCompletion.error){
-            <Notification type={'error'} message={chatCompletion.error} />
+        try {
+            const chatCompletion = await client.chat.completions.create({
+                messages: [{ role: 'user', content: GPTQuery }],
+                model: 'o1-mini'
+            });
+
+            if (chatCompletion.hasOwnProperty('error') || chatCompletion.choices[0]?.message.content === '') {
+                throw new Error('Server error');
+            }
+
+            if (!chatCompletion?.choices[0]) {
+                throw new Error('No response from server');
+            }
+
+            const movieList = chatCompletion?.choices[0]?.message?.content.split(',');
+            await fetchMovie(movieList);
+        } catch (error) {
+            setNotification({ type: 'error', message: 'Error fetching trailers. Please try again.' });
+            dispatch(toggleShimmerEffect(false));
+        } finally {
+            setIsLoading(false);
         }
-        if (!chatCompletion?.choices[0]) {
-            return;
-        }
-        const movieList = chatCompletion?.choices[0]?.message?.content.split(',');
-        fetchMovie(movieList)
-    }
+    };
+
     return (
-        <div className=''>
-            <div className='bg-opacity-80 text-white flex justify-center items-center relative top-32 md:top-2'>
-                <div className='relative top-24 border-2 pl-5 pr-5 pt-4 pb-4 rounded-xl bg-gray-950 bg-opacity-50 border-cyan-600 box-content grid-cols-4 m-4 md:m-2 md:p-4'>
-                    <div className='inline-block text-center'>
-                        <input ref={searchRef} placeholder='What would you like to watch today?' id="search" autoComplete='off' required
-                            className={"h-10 w-80 rounded-lg bg-white bg-opacity-75 border-3 col-span-3 border-black placeholder:text-black placeholder:text-center font-bold mb-2 ease-in-out duration-200 placeholder:font-bold placeholder:text-opacity-30 text-black p-2 " + (!search ? 'outline-none outline-red-500' : '')} />
-                        {!search && <h3 className='text-red-500 font-bold cursor-default focus:outline'>Enter Trailer</h3>}
+        <>
+            {notification && (
+                <Notification
+                    type={notification.type}
+                    message={notification.message}
+                />
+            )}
+
+            <div className="min-h-[30vh] flex pt-40 items-center justify-center px-4">
+                <div className="w-full max-w-2xl backdrop-blur-md bg-black/30 rounded-2xl p-8 shadow-2xl border border-white/10">
+                    <div className="space-y-6">
+                        <div className="relative">
+                            <input
+                                ref={searchRef}
+                                placeholder="What would you like to watch today?"
+                                id="search"
+                                autoComplete="off"
+                                required
+                                className={`w-full h-14 px-6 rounded-xl bg-white/10 backdrop-blur-sm
+                                         border-2 transition-all duration-300 ease-in-out
+                                         text-white placeholder:text-white/50
+                                         focus:outline-none focus:ring-2 focus:ring-cyan-500
+                                         ${!search ? 'border-red-500' : 'border-white/20'}`}
+                            />
+                            <Search className="absolute right-4 top-4 text-white/50" size={24} />
+                        </div>
+
+                        {!search && (
+                            <p className="text-red-500 text-sm font-medium animate-pulse">
+                                Please enter something to search
+                            </p>
+                        )}
+
+                        <button
+                            onClick={handleButtonClick}
+                            disabled={isLoading}
+                            className={`w-full py-4 rounded-xl font-medium text-white
+                                    transition-all duration-300 ease-in-out
+                                    ${isLoading
+                                    ? 'bg-cyan-600/50 cursor-not-allowed'
+                                    : 'bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600'
+                                } shadow-lg hover:shadow-cyan-500/25`}
+                        >
+                            {isLoading ? (
+                                <div className="flex items-center justify-center space-x-2">
+                                    <Loader2 className="animate-spin" size={20} />
+                                    <span>Searching...</span>
+                                </div>
+                            ) : (
+                                'Search Trailers'
+                            )}
+                        </button>
                     </div>
-                    <button htmlFor='search' className={'md:mx-4 mx-20 col-span-3 my-2 px-2 py-1 rounded-lg hover:ease-in-out hover:duration-200 bg-red-700 hover:bg-red-900 font-bold border-2 text-lg mb-1 relative top-0 ' + (!search ? 'bottom-10 md:-top-10' : 'bottom-0')} onClick={handleButtonClick}>Search Trailers</button>
                 </div>
             </div>
-        </div>
-    )
-}
+        </>
+    );
+};
 
-export default GptSearchBar
+export default GptSearchBar;
