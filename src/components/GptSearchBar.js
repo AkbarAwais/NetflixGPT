@@ -79,7 +79,7 @@ const GptSearchBar = () => {
             )}
 
             <div className="min-h-[30vh] flex pt-40 items-center justify-center px-4 sm:px-6">
-                <div className="w-full max-w-2xl backdrop-blur-md bg-black/30 rounded-2xl p-8 shadow-2xl border border-white/10">
+                <div className="w-full max-w-2xl bg-black/60 rounded-2xl p-8 shadow-2xl border border-white/10">
                     <div className="space-y-6">
                         <div className="relative">
                             <input
@@ -88,7 +88,7 @@ const GptSearchBar = () => {
                                 id="search"
                                 autoComplete="off"
                                 required
-                                className={`w-full h-14 px-6 rounded-xl bg-white/10 backdrop-blur-sm
+                                className={`w-full h-14 px-6 rounded-xl bg-white/10
                                          border-2 transition-all duration-300 ease-in-out
                                          text-white placeholder:text-white/50
                                          focus:outline-none focus:ring-2 focus:ring-cyan-500

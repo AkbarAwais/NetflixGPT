@@ -94,7 +94,7 @@ const Form = () => {
                 <div className='flex justify-center items-center'>
                     <form className='space-y-6' onSubmit={(event) => { event.preventDefault(); }}>
                         {/* Name input (only for sign-up) */}
-                        <div className='text-white font-bold cursor-pointer p-3 pt-2 rounded-lg text-center hover:bg-cyan-300 hover:text-black ease-in-out transition-all duration-75' onClick={() => signInWithEmailAndPasswordFn(process.env.REACT_APP_EMAIL, process.env.REACT_APP_PASSWORD)}>
+                        <div className='text-white font-bold cursor-pointer p-3 pt-2 rounded-lg text-center hover:bg-cyan-300 hover:text-black ease-in-out transition-all duration-500' onClick={() => signInWithEmailAndPasswordFn(process.env.REACT_APP_EMAIL, process.env.REACT_APP_PASSWORD)}>
                             Guest Login
                         </div>
                         {!toggleForm && <div className='relative space-y-4'>
