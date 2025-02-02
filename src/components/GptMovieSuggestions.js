@@ -10,7 +10,7 @@ const GptMovieSuggestions = () => {
 
     useEffect(() => {
         fetchGptMovies();
-    }, [movie]); // Added dependency array to trigger effect on 'movie' change
+    }, [movie]);
 
     const fetchGptMovies = async () => {
         try {
@@ -22,19 +22,22 @@ const GptMovieSuggestions = () => {
 
             // Create a new object for each movie and add the trailerKey
             const final = movie.map((item, index) => ({
-                ...item, // Copy all properties of the movie
-                trailerKey: filteredResults[index]?.key, // Add trailerKey
+                ...item,
+                trailerKey: filteredResults[index]?.key,
             }));
 
             setSearchList(final);
         } catch (error) {
             console.error('Error fetching movie trailers:', error);
-            <Notification type={'error'} message={'Server error'} />
+            <Notification type={'error'} message={'Server error'} />;
         }
     };
-    if(!movie) return;
+
+    if (!movie) return null;
+
     return (
-        <div className='text-white absolute w-full top-96 flex overflow-x-scroll md:overflow-x-auto md:top-64 px-0'>
+        <div className='text-white absolute w-full sm:top-10 flex overflow-x-scroll md:overflow-x-auto md:top-96 px-4 sm:px-6 lg:px-8 top-96'>
+            {/* Adjust layout for smaller screens with proper padding and overflow handling */}
             <MovieList title={"Search Results"} movies={searchList} />
         </div>
     );

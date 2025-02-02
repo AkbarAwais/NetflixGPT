@@ -31,7 +31,7 @@ const MovieCardView = ({ title, image, video }) => {
             <div className="w-full h-72 overflow-hidden rounded-lg">
                 <img
                     src={IMAGE_URL(image)}
-                    alt={title}
+                    alt={'Image not available'}
                     className={`
                         w-full
                         h-full

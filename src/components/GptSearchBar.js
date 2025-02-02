@@ -41,14 +41,14 @@ const GptSearchBar = () => {
         }
         setSearch(true);
 
-        const GPTQuery = "Act as a Movie Recommendation system and suggest some movies for the query "
+        const GPTQuery = "Act as a Trailer Recommendation system and suggest some trailers for the query "
             + searchRef.current.value
-            + ". and only give me names of 7 movies, in comma seperated eg: Smile, Hera Pheri, Golmal,Don,Gadar";
+            + ". and only give me names of 7 trailers, in comma separated eg: Smile, Hera Pheri, Golmal,Don,Gadar";
 
         try {
             const chatCompletion = await client.chat.completions.create({
                 messages: [{ role: 'user', content: GPTQuery }],
-                model: 'o1-mini'
+                model: 'anthropic/claude-3.5-haiku-20241022:beta'
             });
 
             if (chatCompletion.hasOwnProperty('error') || chatCompletion.choices[0]?.message.content === '') {
@@ -78,7 +78,7 @@ const GptSearchBar = () => {
                 />
             )}
 
-            <div className="min-h-[30vh] flex pt-40 items-center justify-center px-4">
+            <div className="min-h-[30vh] flex pt-40 items-center justify-center px-4 sm:px-6">
                 <div className="w-full max-w-2xl backdrop-blur-md bg-black/30 rounded-2xl p-8 shadow-2xl border border-white/10">
                     <div className="space-y-6">
                         <div className="relative">

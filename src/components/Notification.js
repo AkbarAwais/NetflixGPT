@@ -12,12 +12,11 @@ const Notification = ({ message, type }) => {
         // Cleanup timer when the component is unmounted
         return () => clearTimeout(timer);
     }, []);
-
-    if (!isVisible) return null; // Don't render the notification if it's not visible
+    if (!isVisible) return null;
 
     return (
         <div
-            className={`fixed top-16 right-4 p-4 rounded-lg shadow-lg ${type === 'success' ? 'bg-green-500' : type === 'error' ? 'bg-red-500' : 'bg-blue-500'
+            className={`fixed top-32 right-4 p-4 rounded-lg shadow-lg ${type === 'success' ? 'bg-green-500' : type === 'error' ? 'bg-red-500' : 'bg-blue-500'
                 } text-white`}
         >
             <span>{message}</span>
