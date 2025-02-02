@@ -92,7 +92,7 @@ const GptSearchBar = () => {
                                          border-2 transition-all duration-300 ease-in-out
                                          text-white placeholder:text-white/50
                                          focus:outline-none focus:ring-2 focus:ring-cyan-500
-                                         ${!search ? 'border-red-500' : 'border-white/20'}`}
+                                         ${!search ? 'border-red-500' : 'border-white/20 pl-2'}`}
                             />
                             <Search className="absolute right-4 top-4 text-white/50" size={24} />
                         </div>
