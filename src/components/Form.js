@@ -94,26 +94,39 @@ const Form = () => {
                 <div className='flex justify-center items-center'>
                     <form className='space-y-6' onSubmit={(event) => { event.preventDefault(); }}>
                         {/* Name input (only for sign-up) */}
-                        <div className='text-white font-bold cursor-pointer p-3 pt-2 rounded-lg text-center hover:bg-cyan-300 hover:text-black ease-in-out transition-all duration-500' onClick={() => signInWithEmailAndPasswordFn(process.env.REACT_APP_EMAIL, process.env.REACT_APP_PASSWORD)}>
-                            Guest Login
+                        <div
+                            className="relative inline-block p-[3px] rounded-lg overflow-hidden cursor-pointer group ml-8 w-48" // Increased width to w-48
+                            onClick={() => signInWithEmailAndPasswordFn(process.env.REACT_APP_EMAIL, process.env.REACT_APP_PASSWORD)}
+                        >
+                            {/* Animated Gradient Border */}
+                            <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-indigo-500 to-pink-500 rounded-lg 
+        animate-gradient-flow group-hover:animate-gradient-pulse"></div>
+
+                            {/* Button Content */}
+                            <div className="relative text-white font-bold bg-black p-3 pt-2 rounded-lg text-center 
+        group-hover:bg-cyan-400 group-hover:text-black transition-colors duration-500">
+                                Guest Login
+                            </div>
                         </div>
+
+
                         {!toggleForm && <div className='relative space-y-4'>
                             <label htmlFor="name" className="absolute text-sm text-gray-400 left-5 top-6 peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-focus:top-2 peer-focus:text-sm">Full Name</label>
-                            <input ref={name} id="name" className='w-full h-12 px-6 py-4 bg-zinc-800/50 rounded text-white focus:border-gray-500 focus:ring-0 focus:bg-zinc-800/50 hover:bg-zinc-800/50 placeholder:text-transparent peer' type='text' placeholder="Full Name" />
+                            <input ref={name} id="name" className='w-full h-12 px-10 py-8 bg-zinc-800/50 rounded text-white focus:border-gray-500 focus:ring-0 focus:bg-zinc-800/50 hover:bg-zinc-800/50 placeholder:text-transparent peer' type='text' placeholder="Full Name" />
                         </div>}
 
                         {/* Guest login button */}
 
                         {/* Email input */}
                         <div className='relative space-y-4'>
-                            <label htmlFor="email" className="absolute text-sm text-gray-400 left-5 top-6 peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-focus:top-2 peer-focus:text-sm">Email</label>
-                            <input ref={email} id="email" className='w-full h-12 px-6 py-4 bg-zinc-800/50 border-zinc-600 rounded text-white focus:border-gray-500 focus:ring-0 focus:bg-zinc-800/50 hover:bg-zinc-800/50 placeholder:text-transparent peer' type='text' placeholder="Email" />
+                            <label htmlFor="email" className=" absolute text-sm text-gray-400 left-5 top-6 peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-focus:top-2 peer-focus:text-sm ">Email</label>
+                            <input ref={email} id="email" className='w-full h-12 px-10 py-8 bg-zinc-800/50 border-zinc-600 rounded  text-white focus:border-gray-500 focus:ring-0 focus:bg-zinc-800/50 hover:bg-zinc-800/50 placeholder:text-transparent peer' type='text' placeholder="Email" />
                         </div>
 
                         {/* Password input (not for reset) */}
                         {!resetBtn && <div className='relative space-y-4'>
                             <label htmlFor="password" className="absolute text-sm text-gray-400 left-5 top-6 peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-focus:top-2 peer-focus:text-sm">Password</label>
-                            <input ref={password} id="password" className='w-full h-12 px-6 py-4 bg-zinc-800/50 rounded text-white focus:border-red-500 focus:ring-0 focus:bg-zinc-800/50 hover:bg-zinc-800/50 placeholder:text-transparent peer' type='password' placeholder="Password" />
+                            <input ref={password} id="password" className='w-full h-12 px-10 py-8 bg-zinc-800/50 rounded text-white focus:border-red-500 focus:ring-0 focus:bg-zinc-800/50 hover:bg-zinc-800/50 placeholder:text-transparent peer' type='password' placeholder="Password" />
                         </div>}
 
                         {/* Error/success messages */}
@@ -126,8 +139,8 @@ const Form = () => {
                         </button>
 
                         {/* Forgot Password link */}
-                        {toggleForm && !resetBtn && <div className='relative space-y-4 text-center'>
-                            <div className="absolute text-sm text-gray-400 left-36 cursor-pointer hover:text-white hover:underline" onClick={forgotPasswordHandler}>Forgot Password?</div>
+                        {toggleForm && !resetBtn && <div className='relative space-y-4'>
+                            <div className=" text-sm text-gray-400 left-36 cursor-pointer hover:text-white hover:underline" onClick={forgotPasswordHandler}>Forgot Password?</div>
                         </div>}
 
                         {/* Reset success message */}

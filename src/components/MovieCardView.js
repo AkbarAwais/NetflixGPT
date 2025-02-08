@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 const MovieCardView = ({ title, image, video }) => {
     const [isHovered, setIsHovered] = useState(false);
     const [iframeSrc, setIframeSrc] = useState('');
+    const [isImageError, setIsImageError] = useState(false); // Track if image fails to load
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -18,9 +19,13 @@ const MovieCardView = ({ title, image, video }) => {
 
     const handleMouseLeave = () => {
         setIsHovered(false);
-        setIframeSrc(''); // Clear the `src` to stop the video
+        setIframeSrc('');
     };
-    
+
+    const handleImageError = () => {
+        setIsImageError(true); // Set error state when image fails to load
+    };
+
     return (
         <div
             className="relative w-48 group px-2"
@@ -28,20 +33,27 @@ const MovieCardView = ({ title, image, video }) => {
             onMouseLeave={handleMouseLeave}
         >
             {/* Base Movie Poster */}
-            <div className="w-full h-72 overflow-hidden rounded-lg">
-                <img
-                    src={IMAGE_URL(image)}
-                    alt={'Image not available'}
-                    className={`
-                        w-full
-                        h-full
-                        object-cover
-                        transition-all
-                        duration-300
-                        ease-in-out
-                        ${isHovered ? 'scale-110' : 'scale-100'}
-                    `}
-                />
+            <div className="w-full h-72 overflow-hidden rounded-lg bg-gray-200">
+                {!isImageError ? (
+                    <img
+                        src={IMAGE_URL(image)}
+                        alt={'Image not available'}
+                        onError={handleImageError}
+                        className={`
+                            w-full
+                            h-full
+                            object-cover
+                            transition-all
+                            duration-300
+                            ease-in-out
+                            ${isHovered ? 'scale-110' : 'scale-100'}
+                        `}
+                    />
+                ) : (
+                    <div className="w-full h-full flex items-center justify-center bg-gray-800 text-white text-center p-4">
+                        <p className="text-lg font-semibold">Trailer Image Not Available</p>
+                    </div>
+                )}
             </div>
 
             {/* Expanded Hover Card */}
@@ -64,17 +76,21 @@ const MovieCardView = ({ title, image, video }) => {
                         : 'opacity-0 scale-100 -translate-y-4 pointer-events-none'}
                 `}
             >
-                {/* Hover Image */}
+                {/* Hover Video */}
                 <div className="relative w-full h-48 overflow-hidden">
-                    {iframeSrc && (
+                    {iframeSrc ? (
                         <iframe
                             className="w-full h-full rounded-lg shadow-lg object-contain"
                             src={iframeSrc}
                             title="YouTube video player"
                             allow="accelerometer; autoplay;"
                             referrerPolicy="strict-origin-when-cross-origin"
-                            allowFullScreen>
-                        </iframe>
+                            allowFullScreen
+                        />
+                    ) : (
+                        <div className="w-full h-full flex items-center justify-center bg-black text-white text-sm">
+                            Video Preview Not Available
+                        </div>
                     )}
                     <div className="absolute inset-0 bg-black bg-opacity-100 flex items-center justify-center h-14">
                         <div className="text-white w-full h-12 hover:scale-110 transition" />
@@ -88,10 +104,13 @@ const MovieCardView = ({ title, image, video }) => {
                 <div className="p-3">
                     <div className="flex justify-between items-center mb-2">
                         <div className="flex space-x-2">
-                            <button className="p-1 bg-white rounded-full hover:bg-gray-500 ease-in-out duration-300" onClick={() => {
-                                dispatch(addMovieToView(iframeSrc));
-                                navigate('/playVideo')
-                            }}>
+                            <button
+                                className="p-1 bg-white rounded-full hover:bg-gray-500 ease-in-out duration-300"
+                                onClick={() => {
+                                    dispatch(addMovieToView(iframeSrc));
+                                    navigate('/playVideo');
+                                }}
+                            >
                                 <Play className="w-5 h-5" fill="gray" />
                             </button>
                         </div>

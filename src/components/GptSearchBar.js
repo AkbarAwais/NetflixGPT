@@ -43,7 +43,7 @@ const GptSearchBar = () => {
 
         const GPTQuery = "Act as a Trailer Recommendation system and suggest some trailers for the query "
             + searchRef.current.value
-            + ". and only give me names of 7 trailers, in comma separated eg: Smile, Hera Pheri, Golmal,Don,Gadar";
+            + ". and only give some 7 movie names that also have data mentioned in the TMDB site, in comma separated eg: Smile, Hera Pheri, Golmal,Don,Gadar";
 
         try {
             const chatCompletion = await client.chat.completions.create({
